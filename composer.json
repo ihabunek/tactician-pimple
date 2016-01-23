@@ -1,7 +1,7 @@
 {
     "name": "bezdomni/tactician-pimple",
-    "description": "Tactician integration with the Pimple DI container",
-    "keywords": ["tactician", "di", "container", "league", "pimple"],
+    "description": "Tactician loader for the Pimple DI container",
+    "keywords": ["tactician", "loader", "container", "league", "pimple"],
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.5",
         "pimple/pimple": "^3.0",
-        "league/tactician": "^0.6.0"
+        "league/tactician": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3"
