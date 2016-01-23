@@ -4,6 +4,9 @@ Tactician Pimple Locator
 Allows lazy loading of command handlers from a
 [Pimple](http://pimple.sensiolabs.org/) dependency injection container.
 
+[![Travis](https://img.shields.io/travis/ihabunek/tactician-pimple.svg?style=flat-square)](https://travis-ci.org/ihabunek/tactician-pimple)
+[![Packagist](https://img.shields.io/packagist/v/bezdomni/tactician-pimple.svg?style=flat-square)](https://packagist.org/packages/bezdomni/tactician-pimple)
+[![Packagist](https://img.shields.io/packagist/l/bezdomni/tactician-pimple.svg?style=flat-square)](https://github.com/ihabunek/tactician-pimple/blob/master/LICENSE)
 
 ## Install
 
