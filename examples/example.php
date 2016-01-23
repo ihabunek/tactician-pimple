@@ -1,56 +1,50 @@
 <?php
 
+use Bezdomni\Tactician\Pimple\PimpleLocator;
+use League\Tactician\CommandBus;
+use League\Tactician\Handler\CommandHandlerMiddleware;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\MethodNameInflector\HandleInflector;
+use Pimple\Container;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-// Create a command and corresponding handler
+// Add some test commands and handlers
+require __DIR__ . '/models.php';
 
-class TestCommand
-{
-
-}
-
-class TestHandler
-{
-    public function handle(TestCommand $command)
-    {
-        // Clever code goes here
-    }
-}
-
-// Create a DI container and mount the test handler
-
-$container = new Pimple\Container();
-
-$container['test_handler'] = function () {
-    echo "Creating a handler\n";
-    return new TestHandler();
+// Create a container and configure the handlers on it
+$container = new Container();
+$container['handlers.user.add'] = function () {
+    echo "Creating AddUserHandler\n";
+    return new AddUserHandler();
+};
+$container['handlers.user.delete'] = function () {
+    echo "Creating DeleteUserHandler\n";
+    return new DeleteUserHandler();
 };
 
-// Create the locator and define the mapping between command class names and
-// the DI container keys containing the handler.
+// Map command class names to container keys holding corresponding handlers
+$locatorMap = [
+    AddUserCommand::class => 'handlers.user.add',
+    DeleteUserCommand::class => 'handlers.user.delete',
+];
 
-$locator = new League\Tactician\Pimple\PimpleLocator($container, [
-    TestCommand::class => 'test_handler'
-]);
+// Create the locator
+$locator = new PimpleLocator($container, $locatorMap);
 
+// Create a command handler middleware using the pimple locator
+$middleware = new CommandHandlerMiddleware(
+    new ClassNameExtractor(),
+    $locator,
+    new HandleInflector()
+);
 
-// Create a command and handle it
+// Create the command bus using the middleware, and you're ready to go
+$commandBus = new CommandBus([$middleware]);
 
-echo "Creating a command\n";
-$command = new TestCommand();
+// Create and run commands on the command bus
+$addUserCommand = new AddUserCommand();
+$deleteUserCommand = new DeleteUserCommand();
 
-echo "Finding a handler\n";
-$handler = $locator->getHandlerForCommand(TestCommand::class);
-
-echo "Calling the handler\n";
-$handler->handle($command);
-
-/*
- * Output:
- *     Creating a command
- *     Finding a handler
- *     Creating a handler
- *     Calling the handler
- *
- * i.e. the handler is created lazily
- */
+$commandBus->handle($addUserCommand);
+$commandBus->handle($deleteUserCommand);
