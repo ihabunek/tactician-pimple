@@ -1,10 +1,9 @@
 <?php
 
-namespace League\Tactician\Pimple;
+namespace Bezdomni\Tactician\Pimple;
 
 use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Handler\Locator\HandlerLocator;
-
 use Pimple\Container;
 
 /**

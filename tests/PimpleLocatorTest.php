@@ -2,7 +2,7 @@
 
 namespace League\Tactician\Pimple\Tests;
 
-use League\Tactician\Pimple\PimpleLocator;
+use Bezdomni\Tactician\Pimple\PimpleLocator;
 
 use League\Tactician\Tests\Fixtures\Command\AddTaskCommand;
 use League\Tactician\Tests\Fixtures\Command\CompleteTaskCommand;
