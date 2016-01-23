@@ -1,7 +1,7 @@
 {
     "name": "bezdomni/tactician-pimple",
-    "description": "Tactician loader for the Pimple DI container",
-    "keywords": ["tactician", "loader", "container", "league", "pimple"],
+    "description": "Tactician command locator for the Pimple DI container",
+    "keywords": ["tactician", "locator", "container", "league", "pimple"],
     "license": "MIT",
     "authors": [
         {
